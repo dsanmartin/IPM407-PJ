@@ -9,10 +9,10 @@ from scipy.special import hermite
 
 
 def fact(n):
-    if (n <= 1):
-        return 1
-    else:
-        return n*fact(n-1)
+	if (n <= 1):
+		return 1
+	else:
+		return n*fact(n-1)
 
 # A_alpha co-efficients
 # input: s = array of input sources
@@ -95,58 +95,58 @@ def Gaussian(pts, s, sb, q, delta):
 # p2    = taylor terms
 # shift = where the expansion is evaluated
 def Gaussian_Hermite(s, q, delta, p, p2, shift):
-    sb = mean(s)      # center of source cluster
-    tc = sb - shift   # 
-    #q_arr = [q,q,q]
-    x    = arange(-1.,1.01,0.02) # evaluation points
-    real = Gaussian(x, s, sb, q, delta)  # direct evaluation
-    # build A_alpha coefficients
-    As = []
-    for i in range(p):
-        As.append(A_alpha(s,q,sb,delta,i))
-        
-    # approximate the Gaussian
-    G = []
-    for i in range(len(x)):
-        temp = 0.
-        for j in range(p):
-            temp = temp + As[j]*exp(-(((x[i]-sb)/sqrt(delta))**2))*hermite(j)((x[i]-sb)/math.sqrt(delta)) #h_alpha((x[i]-sb)/math.sqrt(delta),j)
-        G.append(temp)		
-    
-    # approximate hermite expansion with taylor expansion
-    # already have A_alpha terms
-    # get C_alpha coefficients
+	sb = mean(s)      # center of source cluster
+	tc = sb - shift   # 
+	#q_arr = [q,q,q]
+	x    = arange(-1.,1.01,0.02) # evaluation points
+	real = Gaussian(x, s, sb, q, delta)  # direct evaluation
+	# build A_alpha coefficients
+	As = []
+	for i in range(p):
+		As.append(A_alpha(s,q,sb,delta,i))
+	
+	# approximate the Gaussian
+	G = []
+	for i in range(len(x)):
+		temp = 0.
+		for j in range(p):
+			temp = temp + As[j]*exp(-(((x[i]-sb)/sqrt(delta))**2))*hermite(j)((x[i]-sb)/math.sqrt(delta)) #h_alpha((x[i]-sb)/math.sqrt(delta),j)
+		G.append(temp)
+		
+	# approximate hermite expansion with taylor expansion
+	# already have A_alpha terms
+	# get C_alpha coefficients
     Bs = []
     for beta in range(p2):
-        Bs.append(B_beta(s, q, sb, tc, delta, beta, p))
+ 		Bs.append(B_beta(s, q, sb, tc, delta, beta, p))
  
 	# approximate the Gaussian with the translated series
-    G2 = []
-    for i in range(len(x)):
-        temp = 0.
-        for j in range(p2):
-            temp = temp + Bs[j]*((x[i]-tc)/sqrt(delta))**j
-        G2.append(temp)
+	G2 = []
+	for i in range(len(x)):
+		temp = 0.
+		for j in range(p2):
+			temp = temp + Bs[j]*((x[i]-tc)/sqrt(delta))**j
+		G2.append(temp)
 	
 
-    real = array(real)
-    G = array(G)
-    G2 = array(G2)
-    error = abs(real-G)+1e-20
-    error2 = abs(real - G2) + 1e-20
-    print('max hermite error = ', max(log10(error)))
-    print('best taylor error = ', min(log10(error2)))
-    plot(x,real,'r-')
-    plot(x,G,'b-')
-    plot(x,G2,'c-')
-    #legend(('Direct Solution','Hermite series','Taylor Series'))
-    figure()
-    plot(x,log10(error),'r-')
-    plot(x,log10(error2),'b-')
-    #legend(('Error, p = %d' %(p)))
-    show()
+	real = array(real)
+	G = array(G)
+	G2 = array(G2)
+	error = abs(real-G)+1e-20
+	error2 = abs(real - G2) + 1e-20
+	print 'max hermite error = ',max(log10(error))
+	print 'best taylor error = ',min(log10(error2))
+	plot(x,real,'r-')
+	plot(x,G,'b-')
+	plot(x,G2,'c-')
+	#legend(('Direct Solution','Hermite series','Taylor Series'))
+	figure()
+	plot(x,log10(error),'r-')
+	plot(x,log10(error2),'b-')
+	#legend(('Error, p = %d' %(p)))
+	show()
 	
-    return real, As, G, error 
+	return real, As, G, error 
 
 s     = [0.01, -0.01]
 q     = [1, 0.1]

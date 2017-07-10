@@ -22,7 +22,7 @@ def main():
 
 	scale_max = max(p3_errors.max(),max(p5_errors.max(),max(p9_errors.max(),p12_errors.max())))
 	scale_min = min(p3_errors.min(),min(p5_errors.min(),min(p9_errors.min(),p12_errors.min())))
-	print('scale_max = ',scale_max,'scale_min = ',scale_min)
+	print 'scale_max = ',scale_max,'scale_min = ',scale_min
 
 	# plot the individual error plots
 	ax=subplot(111)

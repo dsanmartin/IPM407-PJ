@@ -24,7 +24,7 @@ command = 'python pyfgt_2d.py '
 # --ML <ML>
 
 for i in p_alpha:
-    for j in N:
-        t_cmd = command + '-s %s -e %e -D %f -N %d -p %d --NF %d --ML %d' %('timeTest_1600',1e-8,0.0001,j,i,0,10000)
-        print(t_cmd)
-        os.popen(t_cmd)
+	for j in N:
+		t_cmd = command + '-s %s -e %e -D %f -N %d -p %d --NF %d --ML %d' %('timeTest_1600',1e-8,0.0001,j,i,0,10000)
+		print t_cmd
+		os.popen(t_cmd)

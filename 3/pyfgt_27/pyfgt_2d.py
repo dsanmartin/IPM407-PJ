@@ -8,32 +8,31 @@ from math import sqrt, exp
 from point2d import *
 from scipy.special import hermite
 import sys
-from string import *
+from string import atof
 from pylab import *
 from optparse import OptionParser
 
 # read file into lists of point_2d objects
 # input - fname - input filename
 def read_file(fname):
-    sArr = []
-    f = open(fname,'r')
-    for line in f:
-        sArr.append(line)
-        
-    X = []
-    temp = []
-    for i, s in enumerate(sArr):
-        vals = s.split()
-        for j in range(0,len(vals)):
-            #temp.append(atof(vals[j]))
-            temp.append(float(vals[j]))
-        if (len(temp) == 3):
-            X.append(point2d(temp[0],temp[1],temp[2],i))
-        else:
-            X.append(point2d(temp[0],temp[1],0,i))
-        temp = []
-    f.close()
-    return X
+	sArr = []
+	f = open(fname,'r')
+	for line in f:
+		sArr.append(line)
+
+	X = []
+	temp = []
+	for i, s in enumerate(sArr):
+		vals = s.split()
+		for j in range(0,len(vals)):
+			temp.append(atof(vals[j]))
+		if (len(temp) == 3):
+			X.append(point2d(temp[0],temp[1],temp[2],i))
+		else:
+			X.append(point2d(temp[0],temp[1],0,i))
+		temp = []
+	f.close()
+	return X
 
 # write results into a CSV file
 # input - r - results
@@ -378,9 +377,6 @@ eps = options.eps
 
 source_file = 'datasets/'+dataset + '/pts.dat'
 target_file = 'datasets/'+dataset + '/targets.dat'
-
-#source_file = "test_src.dat"
-#target_file = "test_target.dat"
 
 # read files ino lists of points
 s = read_file(source_file)
