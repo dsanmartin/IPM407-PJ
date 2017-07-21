@@ -31,7 +31,7 @@ class point2d():
 		return point2d(new_x,new_y)
 	
 	# division by scalar
-	def __div__(self,b):
+	def __truediv__(self,b):
 		new_x = self.x / b
 		new_y = self.y / b
 		
