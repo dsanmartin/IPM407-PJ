@@ -6,3 +6,4 @@ Profesor: Christopher Cooper
 
 * Proyecto 1: Multigrid
 * Proyecto 2: Métodos basados en transformadas de Fourier
+* Proyecto 3: Fast Gauss Transform
